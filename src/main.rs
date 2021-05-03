@@ -1,4 +1,5 @@
 use bevy::prelude::*;
+use bevy::render::pass::ClearColor;
 
 static GAME_SETUP: &str = "game_setup";
 
@@ -10,6 +11,13 @@ struct Materials {
 
 fn main() {
     App::build()
+        .insert_resource(WindowDescriptor {
+            title: "heltram".to_string(),
+            width: 500.0,
+            height: 500.0,
+            ..Default::default()
+        })
+        .insert_resource(ClearColor(Color::rgb(0.04, 0.04, 0.04)))
         .add_plugins(DefaultPlugins)
         .add_startup_system(setup.system())
         .add_startup_stage(GAME_SETUP, SystemStage::single(spawn_tram.system()))
